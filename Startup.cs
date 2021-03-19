@@ -40,6 +40,8 @@ namespace SocialNetwork
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            services.AddScoped<ILikeRepository, LikeRepository>();
+            services.AddScoped<LogUserActivity>();
 
             services.AddScoped<IPhotoService, PhotoService>();
 
