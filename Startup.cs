@@ -37,10 +37,15 @@ namespace SocialNetwork
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CloudinarySetting>(_configuration.GetSection("CloudinarySettings"));
+
             services.AddScoped<IUserRepository, UserRepository>();
 
+            services.AddScoped<IMessageRepository, MessageRepository>();
+
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
             services.AddScoped<ILikeRepository, LikeRepository>();
+
             services.AddScoped<LogUserActivity>();
 
             services.AddScoped<IPhotoService, PhotoService>();
@@ -80,8 +85,11 @@ namespace SocialNetwork
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+
             app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
